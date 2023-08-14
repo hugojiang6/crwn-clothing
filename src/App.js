@@ -1,35 +1,63 @@
-import Directory from './component/directory/directory.component.jsx';
+import { Route, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-const App = () => {
-  const categories = [
-    {
-      id: 1,
-      title: '帽子',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-    },
-    {
-      id: 2,
-      title: '夾克',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-    },
-    {
-      id: 3,
-      title: '運動鞋',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-    },
-    {
-      id: 4,
-      title: '女性',
-      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-    },
-    {
-      id: 5,
-      title: '男性',
-      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-    },
-  ];
+import Navigation from './routers/navigation/navigation.component.jsx';
+import Home from './routers/home/home.component.jsx';
 
-  return <Directory categories={categories} />;
+const Shop = () => {
+  return <h1>i am the shop page</h1>;
 };
+
+// const App = () => {
+//   return (
+//     <Routes>
+//       <Route
+//         path='/'
+//         element={<Navigation />}>
+//         <Route
+//           index
+//           element={<Home />}
+//         />
+//         <Route
+//           path='shop'
+//           element={<Shop />}
+//         />
+//       </Route>
+//     </Routes>
+//   );
+// };
+
+const App = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigation />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: 'shop',
+        element: <Shop />,
+      },
+    ],
+  },
+]);
+
+// const App = createBrowserRouter(
+//   createRoutesFromElements(
+//     <Route
+//       path='/'
+//       element={<Navigation />}>
+//       <Route
+//         index
+//         element={<Home />}
+//       />
+//       <Route
+//         path='shop'
+//         element={<Shop />}
+//       />
+//     </Route>
+//   )
+// );
 
 export default App;
