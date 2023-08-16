@@ -2,6 +2,7 @@ import { Route, Routes, createBrowserRouter, createRoutesFromElements } from 're
 
 import Navigation from './routers/navigation/navigation.component.jsx';
 import Home from './routers/home/home.component.jsx';
+import SignIn from './routers/sign-in/sign-in.conponent.jsx';
 
 const Shop = () => {
   return <h1>i am the shop page</h1>;
@@ -38,6 +39,10 @@ const App = createBrowserRouter([
       {
         path: 'shop',
         element: <Shop />,
+      },
+      {
+        path: 'sign-in',
+        element: <SignIn />,
       },
     ],
   },
