@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,21 +26,18 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 // ======================== google登入 ========================
-
 // 建立認證提供商介面實例
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
-
 // getAuth:取得認證
 export const auth = getAuth();
-
-// signInWithPopup:建立登入彈出視窗，並將本機"google所有帳號"和"認證介面"導入彈出視窗
+// signInWithPopup:建立登入彈出視窗
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
-// ======================== 登入資訊存入firestore ========================
+// ======================== 將認證資料存入firestore ========================
 // getFirestore:建立db (collection) 模型
 export const db = getFirestore();
 // 傳入google認證的使用者訊息
@@ -64,13 +62,16 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   return userDocRef;
 };
 
-// ======================== 帳號密碼登入 ========================
+// ======================== 註冊帳號密碼建立authentication ========================
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
-  try {
-    return await createUserWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.log(`createUserWithEmailAndPassword: ${error}`);
-  }
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+// ======================== EMAIL登入 ========================
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
 };

@@ -15,11 +15,11 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-  // 清空輸入資料
+  // ======================== 清空欄位 ========================
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
-  // ======================== 帳號密碼登入 ========================
+  // ======================== 註冊帳號密碼 ========================
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -37,18 +37,14 @@ const SignUpForm = () => {
       console.log('user creation enconutered an error:' + error);
     }
   };
-
   // ======================== 監聽input ========================
   const handleChange = (event) => {
     const { name, value } = event.target;
-    // console.log(event)
     setFormFields({
       ...formFields,
-      // 中括號無法理解
       [name]: value,
     });
   };
-
   // ======================== html ========================
   return (
     <div className='sign-up-container'>
@@ -57,10 +53,10 @@ const SignUpForm = () => {
       <form onSubmit={handleSubmit}>
         <FormInput
           label='Display Name'
-          htmlFor='displayName'
+          htmlFor='sign-up-displayName'
           inputOptions={{
             type: 'text',
-            id: 'displayName',
+            id: 'sign-up-displayName',
             required: true,
             onChange: handleChange,
             name: 'displayName',
@@ -70,10 +66,10 @@ const SignUpForm = () => {
 
         <FormInput
           label='Email'
-          htmlFor='email'
+          htmlFor='sign-up-email'
           inputOptions={{
             type: 'email',
-            id: 'email',
+            id: 'sign-up-email',
             required: true,
             onChange: handleChange,
             name: 'email',
@@ -83,10 +79,10 @@ const SignUpForm = () => {
 
         <FormInput
           label='Password'
-          htmlFor='password'
+          htmlFor='sign-up-password'
           inputOptions={{
             type: 'password',
-            id: 'password',
+            id: 'sign-up-password',
             required: true,
             onChange: handleChange,
             name: 'password',
@@ -97,10 +93,10 @@ const SignUpForm = () => {
 
         <FormInput
           label='Confirm Password'
-          htmlFor='confirmPassword'
+          htmlFor='sign-up-confirmPassword'
           inputOptions={{
             type: 'password',
-            id: 'confirmPassword',
+            id: 'sign-up-confirmPassword',
             required: true,
             onChange: handleChange,
             name: 'confirmPassword',
