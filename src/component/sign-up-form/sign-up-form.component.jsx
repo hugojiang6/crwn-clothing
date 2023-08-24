@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 
-import './sign-up-form.styles.scss'
+import './sign-up-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+
 
 const defaultFormFields = {
   displayName: '',
@@ -15,6 +16,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
   // ======================== 清空欄位 ========================
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -29,14 +31,17 @@ const SignUpForm = () => {
     }
 
     try {
-      const response = await createAuthUserWithEmailAndPassword(email, password);
-      const { user } = response;
+      // 建立帳號密碼
+      const { user } = await createAuthUserWithEmailAndPassword(email, password);
+
+      // 寫入firestore
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
       console.log('user creation enconutered an error:' + error);
     }
   };
+
   // ======================== 監聽input ========================
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -45,6 +50,7 @@ const SignUpForm = () => {
       [name]: value,
     });
   };
+
   // ======================== html ========================
   return (
     <div className='sign-up-container'>
@@ -74,6 +80,7 @@ const SignUpForm = () => {
             onChange: handleChange,
             name: 'email',
             value: email,
+            autoComplete: 'on',
           }}
         />
 

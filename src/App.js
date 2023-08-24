@@ -1,5 +1,5 @@
-// import { Route, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import { createBrowserRouter } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+// import { createBrowserRouter } from 'react-router-dom';
 
 import Navigation from './routers/navigation/navigation.component.jsx';
 import Home from './routers/home/home.component.jsx';
@@ -9,26 +9,26 @@ const Shop = () => {
   return <h1>i am the shop page</h1>;
 };
 
-const App = createBrowserRouter([
-  {
-    path: '/',
-    element: <Navigation />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: 'shop',
-        element: <Shop />,
-      },
-      {
-        path: 'auth',
-        element: <Authentication />,
-      },
-    ],
-  },
-]);
+// const App = createBrowserRouter([
+//   {
+//     path: '/',
+//     element: <Navigation />,
+//     children: [
+//       {
+//         index: true,
+//         element: <Home />,
+//       },
+//       {
+//         path: 'shop',
+//         element: <Shop />,
+//       },
+//       {
+//         path: 'auth',
+//         element: <Authentication />,
+//       },
+//     ],
+//   },
+// ]);
 
 // const App = () => {
 //   return (
@@ -49,23 +49,14 @@ const App = createBrowserRouter([
 //   );
 // };
 
-
-
-// const App = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route
-//       path='/'
-//       element={<Navigation />}>
-//       <Route
-//         index
-//         element={<Home />}
-//       />
-//       <Route
-//         path='shop'
-//         element={<Shop />}
-//       />
-//     </Route>
-//   )
-// );
+const App = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<Navigation />}>
+      <Route index element={<Home />} />
+      <Route path='shop' element={<Shop />} />
+      <Route path='auth' element={<Authentication />} />
+    </Route>
+  )
+);
 
 export default App;

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.utils';
 
-import './sign-in-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+
+import './sign-in-form.styles.scss';
 
 const defaultFormFields = {
   email: '',
@@ -17,27 +17,31 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+
   // ======================== 清空欄位 ========================
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
-  // ======================== Google登入並寫入firestore ========================
+  // ======================== Google登入 | 寫入firestore ========================
   const signInWithGoogle = async () => {
     try {
-      const { user } = await signInWithGooglePopup();
-      await createUserDocumentFromAuth(user);
+      // google登入
+      await signInWithGooglePopup();
+
     } catch (error) {
       alert(error.code);
     }
   };
-  // ======================== Email登入 ========================
+  // ======================== EMAIL登入 ========================
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(response);
+      // EMAIL登入
+      await signInAuthUserWithEmailAndPassword(email, password);
+
       resetFormFields();
+
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
@@ -77,6 +81,7 @@ const SignInForm = () => {
             onChange: handleChange,
             name: 'email',
             value: email,
+            autoComplete: 'on',
           }}
         />
 
