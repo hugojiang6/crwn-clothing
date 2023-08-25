@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom/client';
 // import { BrowserRouter, RouterProvider } from 'react-router-dom';
 import { RouterProvider } from 'react-router-dom';
 
+import App from './App';
 import { UserProvider } from './contexts/user.context.jsx';
+import { ProductsProvider } from './contexts/products.context';
+import { CartProvider } from './contexts/cart.context';
 
 import './index.scss';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,9 +19,12 @@ root.render(
     </BrowserRouter> */}
 
     <UserProvider>
-      <RouterProvider router={App} />
+      <ProductsProvider>
+        <CartProvider>
+          <RouterProvider router={App} />
+        </CartProvider>
+      </ProductsProvider>
     </UserProvider>
-    
   </React.StrictMode>
 );
 

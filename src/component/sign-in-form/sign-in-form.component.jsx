@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import {
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from '../../utils/firebase/firebase.utils';
 
+import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 
@@ -15,19 +12,28 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  // ======================== useState ========================
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+
+  // ======================== 監聽input ========================
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields({
+      ...formFields,
+      [name]: value,
+    });
+  };
 
   // ======================== 清空欄位 ========================
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
-  // ======================== Google登入 | 寫入firestore ========================
+
+  // ======================== Google登入 ========================
   const signInWithGoogle = async () => {
     try {
-      // google登入
       await signInWithGooglePopup();
-
     } catch (error) {
       alert(error.code);
     }
@@ -37,11 +43,8 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      // EMAIL登入
       await signInAuthUserWithEmailAndPassword(email, password);
-
       resetFormFields();
-
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
@@ -54,15 +57,6 @@ const SignInForm = () => {
           console.log(error.code);
       }
     }
-  };
-
-  // ======================== 監聽input ========================
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormFields({
-      ...formFields,
-      [name]: value,
-    });
   };
 
   // ======================== html ========================

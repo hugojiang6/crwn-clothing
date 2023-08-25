@@ -27,7 +27,6 @@ export const UserProvider = ({ children }) => {
         // 寫入firestore
         createUserDocumentFromAuth(user);
       }
-      console.log(user);
       setCurrentUser(user);
     });
 

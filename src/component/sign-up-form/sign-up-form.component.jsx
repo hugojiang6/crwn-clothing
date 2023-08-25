@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 
-import './sign-up-form.styles.scss';
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 
+import './sign-up-form.styles.scss';
 
 const defaultFormFields = {
   displayName: '',
@@ -14,13 +14,24 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+  // ======================== useState ========================
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
+  // ======================== 監聽input ========================
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields({
+      ...formFields,
+      [name]: value,
+    });
+  };
 
   // ======================== 清空欄位 ========================
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
+
   // ======================== 註冊帳號密碼 ========================
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,15 +51,6 @@ const SignUpForm = () => {
     } catch (error) {
       console.log('user creation enconutered an error:' + error);
     }
-  };
-
-  // ======================== 監聽input ========================
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormFields({
-      ...formFields,
-      [name]: value,
-    });
   };
 
   // ======================== html ========================

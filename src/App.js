@@ -4,10 +4,7 @@ import { Route, createBrowserRouter, createRoutesFromElements } from 'react-rout
 import Navigation from './routers/navigation/navigation.component.jsx';
 import Home from './routers/home/home.component.jsx';
 import Authentication from './routers/authentication/authentication.component.jsx';
-
-const Shop = () => {
-  return <h1>i am the shop page</h1>;
-};
+import Shop from './routers/shop/shop.component.jsx';
 
 // const App = createBrowserRouter([
 //   {

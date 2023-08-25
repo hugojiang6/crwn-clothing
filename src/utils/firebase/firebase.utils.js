@@ -69,7 +69,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 // ======================== 登出 ========================
 export const signOutUser = async () => await signOut(auth);
 
-// ========================  ========================
+// ======================== 監聽登入狀態 ========================
 export const onAuthStateChangedListener = (callback) => {
   onAuthStateChanged(auth, callback);
 };
