@@ -12,6 +12,7 @@ const addCartItem = (cartItems, productToAdd) => {
   // 商品不存在，增加一樣商品
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // 購物車移除商品數量，小於1則移除商品
 const removeCartItem = (cartItems, cartItemToRemove) => {
@@ -25,12 +26,14 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
     cartItem.id === cartItemToRemove.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
   );
 };
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // 購物車移除產品
 const clearCartItem = (cartItems, cartItemToClear) => {
   // 移出該商品
   return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 };
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // createContext Initialization
 export const CartContext = createContext({
@@ -42,8 +45,9 @@ export const CartContext = createContext({
   clearItemFromCart: () => {},
   cartCount: 0,
 });
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-// 購物車 Provider
+// CartProvider
 export const CartProvider = ({ children }) => {
   // 購物車視窗狀態
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -63,7 +67,7 @@ export const CartProvider = ({ children }) => {
     setCartCount(newCartCount);
   }, [cartItems]);
 
-  // 當購物車產品有變動或數量有變動，就重新計算總價
+  // 當購物車產品有變動，就重新計算總價
   useEffect(() => {
     const newCartTotal = cartItems.reduce((total, cartItem) => {
       return total + cartItem.quantity * cartItem.price;
@@ -104,3 +108,4 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

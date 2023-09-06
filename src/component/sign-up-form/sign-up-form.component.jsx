@@ -1,10 +1,12 @@
+// react library
 import { useState } from 'react';
-
+// utils
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
+// component
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
-
-import './sign-up-form.styles.scss';
+// style
+import { SignUpContainer } from './sign-up-form.styles';
 
 const defaultFormFields = {
   displayName: '',
@@ -14,11 +16,11 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
-  // ======================== useState ========================
+  // useState
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
-  // ======================== 監聽input ========================
+  // 監聽input
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({
@@ -27,12 +29,12 @@ const SignUpForm = () => {
     });
   };
 
-  // ======================== 清空欄位 ========================
+  // 清空欄位
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  // ======================== 註冊帳號密碼 ========================
+  // 註冊帳號密碼
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -53,70 +55,61 @@ const SignUpForm = () => {
     }
   };
 
-  // ======================== html ========================
   return (
-    <div className='sign-up-container'>
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label='Display Name'
           htmlFor='sign-up-displayName'
-          inputOptions={{
-            type: 'text',
-            id: 'sign-up-displayName',
-            required: true,
-            onChange: handleChange,
-            name: 'displayName',
-            value: displayName,
-          }}
+          type='text'
+          id='sign-up-displayName'
+          required
+          onChange={handleChange}
+          name='displayName'
+          value={displayName}
         />
 
         <FormInput
           label='Email'
           htmlFor='sign-up-email'
-          inputOptions={{
-            type: 'email',
-            id: 'sign-up-email',
-            required: true,
-            onChange: handleChange,
-            name: 'email',
-            value: email,
-            autoComplete: 'on',
-          }}
+          type='email'
+          id='sign-up-email'
+          required
+          onChange={handleChange}
+          name='email'
+          value={email}
+          autoComplete='on'
         />
 
         <FormInput
           label='Password'
           htmlFor='sign-up-password'
-          inputOptions={{
-            type: 'password',
-            id: 'sign-up-password',
-            required: true,
-            onChange: handleChange,
-            name: 'password',
-            value: password,
-            autoComplete: 'on',
-          }}
+          type='password'
+          id='sign-up-password'
+          required
+          onChange={handleChange}
+          name='password'
+          value={password}
+          autoComplete='on'
         />
 
         <FormInput
           label='Confirm Password'
           htmlFor='sign-up-confirmPassword'
-          inputOptions={{
-            type: 'password',
-            id: 'sign-up-confirmPassword',
-            required: true,
-            onChange: handleChange,
-            name: 'confirmPassword',
-            value: confirmPassword,
-            autoComplete: 'on',
-          }}
+          type='password'
+          id='sign-up-confirmPassword'
+          required
+          onChange={handleChange}
+          name='confirmPassword'
+          value={confirmPassword}
+          autoComplete='on'
         />
 
         <Button type='submit'>Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 

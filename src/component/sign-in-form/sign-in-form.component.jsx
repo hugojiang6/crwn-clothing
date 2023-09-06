@@ -1,11 +1,12 @@
+// react library
 import { useState } from 'react';
-
+// component
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
-
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+// utils
 import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
-
-import './sign-in-form.styles.scss';
+// style
+import { SignInContainer, ButtonsContainer } from './sign-in-form.styles';
 
 const defaultFormFields = {
   email: '',
@@ -13,11 +14,10 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
-  // ======================== useState ========================
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-  // ======================== 監聽input ========================
+  // 監聽input
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({
@@ -26,12 +26,12 @@ const SignInForm = () => {
     });
   };
 
-  // ======================== 清空欄位 ========================
+  // 清空欄位
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  // ======================== Google登入 ========================
+  // Google登入
   const signInWithGoogle = async () => {
     try {
       await signInWithGooglePopup();
@@ -39,7 +39,7 @@ const SignInForm = () => {
       alert(error.code);
     }
   };
-  // ======================== EMAIL登入 ========================
+  // EMAIL登入
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -60,58 +60,43 @@ const SignInForm = () => {
     }
   };
 
-  // ======================== html ========================
   return (
-    <div className='sign-up-container'>
+    <SignInContainer>
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label='Email'
           htmlFor='sign-in-email'
-          inputOptions={{
-            type: 'email',
-            id: 'sign-in-email',
-            required: true,
-            onChange: handleChange,
-            name: 'email',
-            value: email,
-            autoComplete: 'on',
-          }}
+          type='email'
+          id='sign-in-email'
+          required
+          onChange={handleChange}
+          name='email'
+          value={email}
+          autoComplete='on'
         />
 
         <FormInput
           label='Password'
           htmlFor='sign-in-password'
-          inputOptions={{
-            type: 'password',
-            id: 'sign-in-password',
-            required: true,
-            onChange: handleChange,
-            name: 'password',
-            value: password,
-            autoComplete: 'on',
-          }}
+          type='password'
+          id='sign-in-password'
+          required
+          onChange={handleChange}
+          name='password'
+          value={password}
+          autoComplete='on'
         />
 
-        <div className='buttons-container'>
-          <Button
-            buttonOptions={{
-              type: 'submit',
-            }}>
-            Sign In
-          </Button>
-          <Button
-            buttonType='google'
-            buttonOptions={{
-              type: 'button',
-              onClick: signInWithGoogle,
-            }}>
+        <ButtonsContainer>
+          <Button type='submit'>Sign In</Button>
+          <Button buttonType={BUTTON_TYPE_CLASSES.google} type='button' onClick={signInWithGoogle}>
             Google
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 

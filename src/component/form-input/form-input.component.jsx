@@ -1,17 +1,19 @@
-import './form-input.style.scss';
+// style
+import { Group, FormInputLabel, Input } from './form-input.style';
 
-const FormInput = ({ label, htmlFor, inputOptions }) => {
+const FormInput = ({ label, htmlFor, ...inputOptions }) => {
   return (
-    <div className='group'>
-      {/* 要符合css選擇器 "~"，只好把input移至上方 */}
-      <input className='form-input' {...inputOptions} />
+    <Group>
+      <Input {...inputOptions} />
       {label && (
-        <label className={`${inputOptions.value.length ? 'shrink' : ''} form-input-label`} htmlFor={htmlFor}>
+        <FormInputLabel shrink={inputOptions.value.length} htmlFor={htmlFor}>
           {label}
-        </label>
+        </FormInputLabel>
       )}
-    </div>
+    </Group>
   );
 };
 
 export default FormInput;
+
+// property={`{shrink:${inputOptions.value.length}}`}

@@ -1,4 +1,6 @@
+// component
 import Directory from '../../component/directory/directory.component';
+// data
 import CATEGORY from '../../categories-data.json';
 
 const Home = () => {

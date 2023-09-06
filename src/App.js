@@ -1,3 +1,4 @@
+// import { Route, Routes } from 'react-router-dom';
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 import Navigation from './routers/navigation/navigation.component.jsx';
@@ -30,17 +31,11 @@ import Checkout from './routers/checkout/checkout.component.jsx';
 // const App = () => {
 //   return (
 //     <Routes>
-//       <Route
-//         path='/'
-//         element={<Navigation />}>
-//         <Route
-//           index
-//           element={<Home />}
-//         />
-//         <Route
-//           path='shop'
-//           element={<Shop />}
-//         />
+//       <Route path='/' element={<Navigation />}>
+//         <Route index element={<Home />} />
+//         <Route path='shop' element={<Shop />} />
+//         <Route path='auth' element={<Authentication />} />
+//         <Route path='checkout' element={<Checkout />} />
 //       </Route>
 //     </Routes>
 //   );
@@ -50,7 +45,7 @@ const App = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Navigation />}>
       <Route index element={<Home />} />
-      <Route path='shop' element={<Shop />} />
+      <Route path='shop/*' element={<Shop />} />
       <Route path='auth' element={<Authentication />} />
       <Route path='checkout' element={<Checkout />} />
     </Route>
