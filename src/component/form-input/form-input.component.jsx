@@ -6,7 +6,7 @@ const FormInput = ({ label, htmlFor, ...inputOptions }) => {
     <Group>
       <Input {...inputOptions} />
       {label && (
-        <FormInputLabel shrink={inputOptions.value.length} htmlFor={htmlFor}>
+        <FormInputLabel property={inputOptions.value.length} htmlFor={htmlFor}>
           {label}
         </FormInputLabel>
       )}
