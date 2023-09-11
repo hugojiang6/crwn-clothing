@@ -10,7 +10,7 @@ export const CategoriesContext = createContext({
 });
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-// CategoriesProvider
+// <<<<<<<<<<<<<<<<<<<<<<< provider >>>>>>>>>>>>>>>>>>>>>>>
 export const CategoriesProvider = ({ children }) => {
   // 產品物件狀態
   const [categoriesMap, setCategoriesMap] = useState({});
