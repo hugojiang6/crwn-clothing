@@ -1,6 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
 
-import { addCollectionAndDocuments, getCategoriesAndDocuments } from '../utils/firebase/firebase.utils.js';
+import {
+  // addCollectionAndDocuments,
+  getCategoriesAndDocuments,
+} from '../utils/firebase/firebase.utils.js';
 
 // import SHOP_DATA from '../shop-data.js';
 
@@ -37,6 +40,8 @@ export const CategoriesProvider = ({ children }) => {
   //   addCollectionAndDocuments('categories', SHOP_DATA)
   // },[])
 
-  return <CategoriesContext.Provider value={{ categoriesMap, setCategoriesMap }}>{children}</CategoriesContext.Provider>;
+  return (
+    <CategoriesContext.Provider value={{ categoriesMap, setCategoriesMap }}>{children}</CategoriesContext.Provider>
+  );
 };
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
