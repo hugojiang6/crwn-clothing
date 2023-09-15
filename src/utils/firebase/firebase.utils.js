@@ -70,16 +70,18 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
 // 獲取firestore資料
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(firestore, 'categories');
-  const dataQuery = query(collectionRef);
-  const dataQuerySnapshop = await getDocs(dataQuery);
+  const queryData = query(collectionRef);
+  const queryDataSnapshop = await getDocs(queryData);
 
-  const categoriesMap = dataQuerySnapshop.docs.reduce((acc, docSnapshop) => {
-    const { title, items } = docSnapshop.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
+  return queryDataSnapshop.docs.map((docSnapshot) => docSnapshot.data());
 
-  return categoriesMap;
+  // const categoriesMap = queryDataSnapshop.docs.reduce((acc, docSnapshop) => {
+  //   const { title, items } = docSnapshop.data();
+  //   acc[title.toLowerCase()] = items;
+  //   return acc;
+  // }, {});
+
+  // return categoriesMap;
 };
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
