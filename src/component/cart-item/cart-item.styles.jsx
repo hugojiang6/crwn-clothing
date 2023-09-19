@@ -25,4 +25,10 @@ export const ItemDetails = styled.div`
   & .price {
     font-size: 16px;
   }
+
+  & .remove {
+    font-size: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+  }
 `;

@@ -1,25 +1,22 @@
+// react
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+// redux
 import { Provider } from 'react-redux';
-
+import { store } from './store/store';
+// component
 import App from './App';
-
-import { CartProvider } from './contexts/cart.context';
-
+// styles
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
-
-import { store } from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <CartProvider>
-          <App />
-        </CartProvider>
+        <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

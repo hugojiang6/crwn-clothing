@@ -1,11 +1,15 @@
+// react
 import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+// redux
 import { useDispatch } from 'react-redux';
-
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils';
-
 import { setCurrentUser } from './store/user/user.action';
-
+// utils
+import {
+  onAuthStateChangedListener,
+  createUserDocumentFromAuth,
+} from './utils/firebase/firebase.utils';
+// component
 import Navigation from './routers/navigation/navigation.component.jsx';
 import Home from './routers/home/home.component.jsx';
 import Authentication from './routers/authentication/authentication.component.jsx';

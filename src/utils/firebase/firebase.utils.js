@@ -9,7 +9,16 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc, collection, writeBatch, query, getDocs } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBE_z1T1hrnM0escY3LmbocBrNAPhX9cPk',
@@ -27,13 +36,17 @@ googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
 const auth = getAuth(firebaseApp);
-export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
 // export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // 建立資料庫User寫入firestore
 const firestore = getFirestore();
-export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation
+) => {
   if (!userAuth) return;
   const userDocRef = doc(firestore, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
@@ -42,7 +55,12 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     const { displayName, email } = userAuth;
     const CreatedAt = new Date();
     try {
-      await setDoc(userDocRef, { displayName, email, CreatedAt, ...additionalInformation });
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        CreatedAt,
+        ...additionalInformation,
+      });
     } catch (error) {
       console.log('error creating the user', error.message);
     }
