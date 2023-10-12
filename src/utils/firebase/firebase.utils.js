@@ -89,6 +89,8 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(firestore, 'categories');
   const queryData = query(collectionRef);
+
+  // await Promise.reject(new Error('new error woops'))
   const queryDataSnapshop = await getDocs(queryData);
 
   return queryDataSnapshop.docs.map((docSnapshot) => docSnapshot.data());
